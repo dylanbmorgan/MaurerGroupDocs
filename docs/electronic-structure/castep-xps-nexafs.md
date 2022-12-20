@@ -21,7 +21,7 @@ Next, to organise the filing system to use, once all set up this should contain:
 
 and should end up looking something like this.
 
-<img src="../images/spectroscopy/setup.png">
+![Setup](/assets/images/spectroscopy/setup.png)
 
 The initial singlepoint ground-state calculation should be the first to be completed. The reason for this can be for several reasons but the main one is to work out the ground-state total energy that will be used later to calculate the XPS binding energies. It is then important to make sure the settings you are using for this are sufficient and will be carried on through the process. If this is your first time using CASTEP or do not know the pseudopotential for an element, this step can be used to generate on-the-fly pseudopotentials and obtain the pseudopotential strings for all elements in the calculation. If you are already well versed in CASTEP and already know which pseudopotentials you will use, you can set the in from the start here and skip this.
 
@@ -29,7 +29,7 @@ If you're investigating a molecule on a metal surface rather than a gas-phase mo
 
 To acquire the pseudopotential string if needed, open any of the _.usp_ files. Here we will use the _C_C18_PBE_OTF.usp_ file. At the top of the file should give you all the information about the pseudopotential used and near the bottom of the box will be the definition string for you to copy to use for the XPS and NEXAFS calculations. In this case for carbon, the string is `2|1.4|10|12|13|20:21(qc=7)`, record this down and do the same for each element in the system to use in the next step.
 
-<img src="../images/spectroscopy/pseudopotential_string.png" width="500">
+![Pseudopotential string](/assets/images/spectroscopy/pseudopotential_string.png)
 
 ## 2. Generation of XPS and NEXAFS inputs using autoscript.py
 
@@ -38,17 +38,17 @@ To generate the XPS and NEXAFS directories with all the input files needed for e
 * _core_excitation.py_
 * _Geometry file of the system_
 
-<img src="../images/spectroscopy/autoscript.png">
+![autoscript](/assets/images/spectroscopy/autoscript.png)
 
 The _core_excitation.py_ file can be left alone and doesn't need to be altered. To use this code all you need to do is open up the _autoscript.py_ file and change the required fields and set the settings you want in the calculation, overall, this will be the same as the ground-state calculations with a few exceptions which will be explained. At the top the first thing to alter is the `input_name`, the geometry file to read in and the `output_name` you want the script to use as the CASTEP seedname. In this case, these two are basically the same and would be `azulene_Ag.cell` and `azulene_Ag` but through ASE, you can read in any file format you want if needed.
 
 Next is where you need to set the elements and pseudopotential strings you save before. Here you can create any number you need and copy in the pseudopotential strings. For the atoms you want to study the XPS for you will need to copy in the pseudopotential string twice again but this time adding in the electron configuration to include either a full core-hole (XPS) or half core-hole (NEXAFS). This is done starting at line 81, where for a C1s calculation we put in `element='C'` and `pspots='2|1.4|10|12|13|20:21{1s1,2s2,2p3}(qc=7)'` with the full core-hole in the `xce` and the same again for `nce` but this time with a half core hole.
 
-<img src="../images/spectroscopy/core_holes.png">
+![core holes](/assets/images/spectroscopy/core_holes.png)
 
 Also, starting on line 100 is where the pseudopotential strings you stated at the top are written out to the .cell files and you need to add/change to match with the elements you have, this will include adding in any new lines for the number of elements and adding this line to the print line for both XPS and NEXAFS sections. In the default script included is an example of how a new line if a 4th element nitrogen is needed and if a gas-phase calculation is begin run then the metal and line3 would need to be commented out.
 
-<img src="../images/spectroscopy/write_pseudo.png">
+![write pseudo](/assets/images/spectroscopy/write_pseudo.png)
 
 The final part is to set the parameters you want for the calculation. Under the CASTEP calculators `QM1` and `QM2` you should set `castep_command` to the path of where your CASTEP binary is located. Next in QM1 choose and set all the keywords you want to include in the XPS calculation. Then if any settings need to be changed for the NEXAFS calculation add these to `QM2`. Most likely this will only need to be `nextra_bands` and `elnes_nextra_bands`. This is due to only the first needed for XPS and usually, only a low number is needed and any higher is a waste computationally. For the NEXAFS calculations the second term is needed and to generate a nice full spectrum without it ending too soon a much larger number of bands are needed and for the MolPDOS analysis, both `nextra_bands` and `elnes_nextra_bands` need to be the same value in the NEXAFS case. So set this value to a higher value(trial and error/learning will help with picking a suitable number).
 
@@ -58,7 +58,7 @@ Finally, if a MolPDOS analysis is needed you need to set a few other keywords fo
 
 Once all of that is done it is time to run _autoscript.py_, you should see two directories called XPS and NEXAFS have been created. These should contain a directory for each carbon atom in your molecule labeled with a number, this number just corresponds to the order it appears in the input geometry file. If you look into these directories they should contain the two CASTEP input files _.cell_ and _.param_. You can easily copy the parameter file over to the main folder, set the charge to zero and use it for the ground state calculation.
 
-<img src="../images/spectroscopy/run_autoscript.png">
+![run autoscript](/assets/images/spectroscopy/run_autoscript.png)
 
 You will notice that running _autoscript.py_ will give a warning that a pseudopotential path has not been given to the calculator, this is fine and is not a problem as we are specifically stating our pseudopotentials out and not using a database which is what the code is asking for. This function can be used to point to a database of pseudopotentials which is not implemented to keep full control over the pseudopotentials we want to use.
 
@@ -67,15 +67,15 @@ Now you can copy over the contents of your newly created **XPS** and **NEXAFS** 
 
 The first would be to create your reference _azulene_free.check_ file needed for the MolPDOS calculation. Once this is done this file then needs to be copied into every atom directory in the NEXAFS directory. If a gas-phase calculation is being performed this will instead be the _azulene_gas.check_ created from the ground state calculation and changed to be called _azulene_ground.check_. Also, what is needed is a .deltascf file which gives the parameters needed for the MolPDOS calculation, here we point the code to the _azulene_free.check_ file and list the specific states that we want to project out.
 
-<img src="../images/spectroscopy/deltascf_file.png" width="500">
+![deltascf](/assets/images/spectroscopy/deltascf_file.png)
 
 Once done each atom folder should look like this.
 
-<img src="../images/spectroscopy/nexafs_setup.png">
+![nexafs setup](/assets/images/spectroscopy/nexafs_setup.png)
 
 All that's is left is to run all of the XPS and NEXAFS jobs. In regards to the number of nodes and walltime needed for the calculations, the XPS calculations will be similar to the length of the ground-state calculation. The NEXAFS will require more memory (nodes) and longer walltimes and the best practice would be to run only one calculation first to gauge this and then use the settings for all of the rest. With time a better understanding of the requirements needed will be able to be learned. Once done transfer the data back to your local machine and for NEXAFS calculations you should see the usual outputs along with a _.molpdos_state_x_1_ file for all MO state you gave earlier.
 
-<img src="../images/spectroscopy/molpdos_state.png">
+![molpdos state](/assets/images/spectroscopy/molpdos_state.png)
 
 ## 4. Obtaining and plotting XPS
 
@@ -85,9 +85,9 @@ The first task that needs to be done after all the calculations are done is to c
 
 The _castep_get_xps_energies.py_ python script should be placed in the **XPS** directory and then the necessary parameters have to be changed in the script manually. These will be the `filename`, `element` and `atoms` to the required settings that match the system. Once this is done, the script can be executed and it will read the groud-state and excited-state energies for each atom and calculate and apply the pseudopotential correction, and finally print out the binding energies into an XPS_peaks.txt file.
 
-<img src="../images/spectroscopy/castep_get_xps_energies.png">
+![xps energies](/assets/images/spectroscopy/castep_get_xps_energies.png)
 
-<img src="../images/spectroscopy/getting_xps_energies.png">
+![getting xps energies](/assets/images/spectroscopy/getting_xps_energies.png)
 
 With the XPS binding energies now written out, the _plot_xps.py_ script can be used to take the individual shifts and sum them all up and plot them into a broadened spectrum. By commenting out the `assert 0` command on line 87 the script will broaden each individual atom peak and create text files for each atom which can be plotted along with the full spectrum to show the breakdown of the spectrum.
 
@@ -101,19 +101,19 @@ Now to run the NEXAFS post-processing we need a settings file with all the infor
 If you want to project the NEXAFS transitions onto molecular states of a reference system, you also have to set:
 * `modos_state` - Set the corresponding states to exactly the same orbital values you selected previously for the calculation
 
-<img src="../images/spectroscopy/molpdos_file.png" width="500">
+![moldpdos file](/assets/images/spectroscopy/molpdos_file.png)
 
 To run the MolPDOS post-processing you first need to have the MolPDOS binary located in your path and this will use the _execute_molpdos.sh_ script to first add the correct nexafs_xshift to the right atoms and then run the MolPDOS binary for each angle you want. So these need to be set at the top of the script, change the first `Array` to the correct values of the atoms and the AngleArray to the incidence angles you want to calculate. The change the molecule, metal and element to the correct setting and then run the script.
 
 This script will take some time to run and finish for all of the atoms and angles but will write out the progress of the script into the terminal to show you the progress. To not take up the terminal nohup can be used to run the script in the background. Once done this will have to generate a new folder in each of the atoms folders for each angle chosen and be filled with a whole host of _.dat_ files.
 
-<img src="../images/spectroscopy/run_molpdos.png">
+![run molpdos](/assets/images/spectroscopy/run_molpdos.png)
 
-<img src="../images/spectroscopy/finish_molpdos.png">
+![finish molpdos](/assets/images/spectroscopy/finish_molpdos.png)
 
 These should be organised into a corresponding directory labeled based on the theta value, for example, **t25**. Repeat this MolPDOS process for each incidence angles you want to simulate for and for all carbon atoms. Normal practice would be for 00, 25, 53, and 90 degrees. Your directory for all carbons should look like this.
 
-<img src="../images/spectroscopy/molpdos_files.png">
+![molpdos files](/assets/images/spectroscopy/molpdos_files.png)
 
 You should use an automated script for this procedure. Provided is the _auto_molpdos.sh_ script which should be executed in the NEXAFS directory, It reads the _C_XPS_peaks.txt_ file (copy from XPS to the NEXAFS directory), changes a generic _.molpdos_ file to match the desired angle and XPS binding energies, goes to the corresponding carbon directory, and executes the script, and moves the resulting data in the respective folders.
 
@@ -125,12 +125,12 @@ The final step left to do is to take all of the data produced through the MolPDO
 
 These scripts should be placed in the **NEXAFS** directory and change the corresponding settings inside the script to match you data. These are listed into different groups, the first is `Broadening Parameters`. These are the settings of the pseudo-Voight broadening scheme that will be applied, the settings in there are the default carbon settings that usually work best but they can be modified to create the best spectra. If a different element is being studied N or O K-edge then the `xstart` and `xstop` values will have to be changed to fall in the energy range of the chose element. The next group are the `System Settings`, these are the main settings to change. Here we have the `molecule` and `metal` variables to change to the name of your system, and then also the `element`. We have the `n_type` which will decide what NEXAFS spectra you want to generate, a number between 1-4, default would be 4, the script shows what each number performs. `angle` you will set to the same angles you selected when running MolPDOS, so in this case `'t00', 't25', 't53', t90'`. Then the `numbers` will be the number range of your atom directories, here 48 to 57, and the atom number, this is as described before the value the excited element comes in the list of all elements, always the last number.
 
-<img src="../images/spectroscopy/plot_nexafs_settings.png">
+![plot nexafs settings](/assets/images/spectroscopy/plot_nexafs_settings.png)
 
 Run this script and it will generate (for each angle) a _*deltas.txt_, containing the summed up raw data of all NEXAFS transitions, and a _*spectrum.txt' file with the fully calculated broadened spectrum. If the individual carbon contributions of the NEXAFS spectrum is desired then comment out the `assert 0` command on line 122 and this will generate a separate _.txt_ file for each individual atom at each angle.
 
-<img src="../images/spectroscopy/plot_nexafs.png">
+![plot nexafs](/assets/images/spectroscopy/plot_nexafs.png)
 
 The last step would be to output the individual MO contributions, these settings to change are the exact same as before for the NEXAFS script but now with one more which is `MO`, which will be the list of MO orbitals you choose to project out. Run the script again and you will receive a _*.txt_ file of the delta peaks and the broadened orbital projection for all orbitals and angles. This can now be plotted with its corresponding NEXAFS spectra to view its contributions.
 
-<img src="../images/spectroscopy/plot_mo.png">
+![plot mo](/assets/images/spectroscopy/plot_mo.png)

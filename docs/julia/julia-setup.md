@@ -7,8 +7,10 @@ Julia can be directly obtained from the [website](https://julialang.org/download
 
 On Linux, you should use `wget` to download the tarball and extract using `tar -zxvf`. Next, you should ensure that the `julia` binary is added to the `PATH` environment variable.
 
-> I keep two top level directories for storing programs, `~/programs` and `~/bin`, where `~/bin` is a directory added to the path within the `.bash_profile`. I put the `julia-x.y.z` directory inside `~/programs` and create a symbolic link (`ln -s ~/programs/julia-x.y.z/bin/julia ~/bin/julia`) to the `~/bin` directory. The advantage of this method is that only `~/bin` needs to be added to the `PATH`.
-> Any time you need a new program you can follow this pattern and things remain organised.
+!!! tip
+
+    I keep two top level directories for storing programs, `~/programs` and `~/bin`, where `~/bin` is a directory added to the path within the `.bash_profile`. I put the `julia-x.y.z` directory inside `~/programs` and create a symbolic link (`ln -s ~/programs/julia-x.y.z/bin/julia ~/bin/julia`) to the `~/bin` directory. The advantage of this method is that only `~/bin` needs to be added to the `PATH`.
+    Any time you need a new program you can follow this pattern and things remain organised.
 
 At this point you should be able to type `julia` and have the REPL appear before your very eyes.
 

@@ -1,11 +1,6 @@
 # Contributing to NQCD
 
-<p align="right">
-  <a href="https://nqcd.github.io/NQCDynamics.jl/stable/">
-    <img src="../images/julia/nqcdlogo.png" alt="NQCDynamics.jl logo"
-         title="NQCDynamics.jl" align="right" height="150"/>
-  </a>
-</p>
+![NQCD logo](/assets/images/julia/nqcdlogo.png){ align=right width=200 }
 
 This page describes the process of contributing to NQCD for members of the maurergroup.
 In particular, it focuses on the case where your contributions should be kept private until ready for publication.

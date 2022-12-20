@@ -1,0 +1,88 @@
+# Navigation. Add new pages here:
+nav:
+  - Home: index.md
+  - Recommended reading: recommended-reading.md
+  - HPC infrastructure: hpc.md
+  - Electronic structure software:
+      - FHI-aims: electronic-structure/fhi-aims.md
+      - GPAW:
+        - GPAW: electronic-structure/gpaw.md
+        - GPAW on Archer2: compilation/gpaw-archer2.md
+        - GPAW on Sulis: compilation/gpaw-sulis.md
+      - CASTEP:
+        - How to perform XPS and NEXAFS simulations: electronic-structure/castep-xps-nexafs.md
+  - The Julia programming language:
+    - Introduction to Julia: julia/julia.md
+    - How to setup Julia on HPC systems: julia/julia-setup.md
+    - How to contribute to NQCD: julia/nqcd.md
+    - How to host binary packages with BinaryBuilder.jl: julia/hosting-jll.md
+    - Distributed Julia on Slurm clusters: julia/distributed-slurm.md
+  - Atomic visualisation and rendering:
+    - Pymol API tutorial: visualisation/pymol.md
+
+site_name: Maurer group documentation
+repo_name: maurergroup/MaurerGroupDocs
+repo_url: https://github.com/maurergroup/MaurerGroupDocs
+edit_uri: edit/main/docs
+
+copyright: Copyright &copy; 2022 Reinhard Maurer
+
+theme:
+  name: material
+  features:
+  # - announce.dismiss
+  - content.code.annotate
+  # - content.tabs.link
+  - content.tooltips
+  # - header.autohide
+  # - navigation.expand
+  - navigation.indexes
+  # - navigation.instant
+  # - navigation.prune
+  # - navigation.sections
+  # - navigation.tabs
+  # - navigation.tabs.sticky
+  - navigation.top
+  - navigation.tracking
+  - search.highlight
+  - search.share
+  - search.suggest
+  - toc.follow
+  # - toc.integrate
+  palette:
+    - scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/logo.png
+  icon:
+    logo: logo
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/maurergroup
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/compsurfchem
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+

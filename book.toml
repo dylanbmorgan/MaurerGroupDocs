@@ -1,9 +1,0 @@
-[book]
-authors = ["James Gardner"]
-language = "en"
-multilingual = false
-src = "src"
-title = "MaurerGroupDocs"
-
-[output.html]
-default-theme = "rust"
