@@ -1,0 +1,1009 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/logo.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>How to perform XPS and NEXAFS simulations - Maurer group documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#castep-xps-and-nexafs-tutorial" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Maurer group documentation" class="md-header__button md-logo" aria-label="Maurer group documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Maurer group documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How to perform XPS and NEXAFS simulations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/maurergroup/MaurerGroupDocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    maurergroup/MaurerGroupDocs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Maurer group documentation" class="md-nav__button md-logo" aria-label="Maurer group documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 89 89">
+  <path d="M3.136,17.387l0,42.932l42.932,21.467l-42.932,-64.399Z" />
+  <path d="M21.91,8l42.933,64.398l-18.775,9.388l-42.932,-64.399l18.774,-9.387Z" style="fill-opacity: 0.5" />
+  <path d="M67.535,17.387l-27.262,18.156l21.878,32.818l5.384,2.691l0,-53.665Z" />
+  <path d="M67.535,17.387l0,53.666l18.774,-9.388l0,-53.665l-18.774,9.387Z" style="fill-opacity: 0.25" />
+</svg>
+
+    </a>
+    Maurer group documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/maurergroup/MaurerGroupDocs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    maurergroup/MaurerGroupDocs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommended-reading/" class="md-nav__link">
+        Recommended reading
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hpc/" class="md-nav__link">
+        HPC infrastructure
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Electronic structure software
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Electronic structure software" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Electronic structure software
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fhi-aims/" class="md-nav__link">
+        FHI-aims
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_2">
+          GPAW
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="GPAW" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPAW
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpaw/" class="md-nav__link">
+        GPAW
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compilation/gpaw-archer2/" class="md-nav__link">
+        GPAW on Archer2
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../compilation/gpaw-sulis/" class="md-nav__link">
+        GPAW on Sulis
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" checked>
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_4_3">
+          CASTEP
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="CASTEP" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          CASTEP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          How to perform XPS and NEXAFS simulations
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        How to perform XPS and NEXAFS simulations
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-set-up" class="md-nav__link">
+    1. Set-Up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generation-of-xps-and-nexafs-inputs-using-autoscriptpy" class="md-nav__link">
+    2. Generation of XPS and NEXAFS inputs using autoscript.py
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-setting-up-and-running-jobs" class="md-nav__link">
+    3. Setting up and running jobs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-obtaining-and-plotting-xps" class="md-nav__link">
+    4. Obtaining and plotting XPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-nexafs-post-processing-and-molpdos" class="md-nav__link">
+    5. NEXAFS Post-Processing and MolPDOS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-summation-and-broadening-of-the-nexafs-spectra" class="md-nav__link">
+    6. Summation and broadening of the NEXAFS spectra
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_5">
+          The Julia programming language
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="The Julia programming language" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          The Julia programming language
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../julia/julia/" class="md-nav__link">
+        Introduction to Julia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../julia/julia-setup/" class="md-nav__link">
+        How to setup Julia on HPC systems
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../julia/nqcd/" class="md-nav__link">
+        How to contribute to NQCD
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../julia/hosting-jll/" class="md-nav__link">
+        How to host binary packages with BinaryBuilder.jl
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../julia/distributed-slurm/" class="md-nav__link">
+        Distributed Julia on Slurm clusters
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+        
+          
+        
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Atomic visualisation and rendering
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Atomic visualisation and rendering" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Atomic visualisation and rendering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../visualisation/pymol/" class="md-nav__link">
+        Pymol API tutorial
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-set-up" class="md-nav__link">
+    1. Set-Up
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-generation-of-xps-and-nexafs-inputs-using-autoscriptpy" class="md-nav__link">
+    2. Generation of XPS and NEXAFS inputs using autoscript.py
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-setting-up-and-running-jobs" class="md-nav__link">
+    3. Setting up and running jobs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-obtaining-and-plotting-xps" class="md-nav__link">
+    4. Obtaining and plotting XPS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-nexafs-post-processing-and-molpdos" class="md-nav__link">
+    5. NEXAFS Post-Processing and MolPDOS
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-summation-and-broadening-of-the-nexafs-spectra" class="md-nav__link">
+    6. Summation and broadening of the NEXAFS spectra
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/maurergroup/MaurerGroupDocs/edit/main/docs/electronic-structure/castep-xps-nexafs.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="castep-xps-and-nexafs-tutorial">CASTEP XPS and NEXAFS Tutorial</h1>
+<p>All tools needed to generate XPS and NEXAFS spectra can be found on the Maurer Group Github in the 'grouptools/NEXAFS_scripts' repository. Included in this are several tools to help in this process:</p>
+<ul>
+<li><em>autoscript.py</em> - Python script which will generate all XPS and NEXAFS input files</li>
+<li><em>core_excitation.py</em> - Code in which the autoscript will use</li>
+<li><em>castep_get_XPS_energies.py</em> - Python script to calculate the XPS binding energies</li>
+<li>_plot_xps.py - Python script to sum up XPS peaks and broaden into a spectrum</li>
+<li><em>execute_molpdos.sh</em> - Bash script to run MolPDOS for all angles and atoms</li>
+<li><em>plot_nexafs.py</em> - Python script to process MolPDOS output data into a broadened NEXAFS spectra</li>
+<li><em>plot_mo.py</em> - Python script to process MolPDOS output data into MO orbital spectra</li>
+</ul>
+<h2 id="1-set-up">1. Set-Up</h2>
+<p>To begin with, a suitable file system, naming convention, and some initial ground-state calculations are needed to help with the process. In CASTEP all files, input, and output have the same seedname so for our system we will use a '<em>molecule_metal</em>' configuration. This is important to implement right from the beginning as scripts used later will use this convention. The '<em>molecule</em>' is simply just the investigated molecule, e.g. azulene, benzene, pyridine, and the '<em>metal</em>' is the metal substrate, e.g. Cu, Au, or simply gas if no metal surface is present. So for example in this tutorial, we will be looking at azulene on a silver surface so files would use <em>azulene_Ag</em> as the seedname to make files such as <em>azulene_Ag.cell</em> and will continue with this tutorial using this system.</p>
+<p>Next, to organise the filing system to use, once all set up this should contain:
+* Input and output files from the initial ground-state calculation
+* <strong>freestand</strong> directory (Directory containing files from the calculation of the free-standing overlayer, only needed when including a metal surface)
+* <strong>XPS</strong> directory (Directory generated by autoscript.py)
+* <strong>NEXAFS</strong> directory (Directory generated by autoscript.py)</p>
+<p>and should end up looking something like this.</p>
+<p><img alt="Setup" src="../../assets/images/spectroscopy/setup.png" /></p>
+<p>The initial singlepoint ground-state calculation should be the first to be completed. The reason for this can be for several reasons but the main one is to work out the ground-state total energy that will be used later to calculate the XPS binding energies. It is then important to make sure the settings you are using for this are sufficient and will be carried on through the process. If this is your first time using CASTEP or do not know the pseudopotential for an element, this step can be used to generate on-the-fly pseudopotentials and obtain the pseudopotential strings for all elements in the calculation. If you are already well versed in CASTEP and already know which pseudopotentials you will use, you can set the in from the start here and skip this.</p>
+<p>If you're investigating a molecule on a metal surface rather than a gas-phase molecule, you will need to perform a second singlepoint calculation. This will be carried out in the <strong>freestand</strong> directory. In here you should copy over the <em>.cell</em> and <em>.param</em> files from the ground-state but rename them <em>azulene_free</em> to describe correctly and avoid confusion and required for a later step. In this directory you will need to open up the <em>.cell</em> file and delete the metal surface, leaving only the molecule, which is called the free-standing overlayer. This step is carried to generate the <em>azulene_free.check</em> file which is used later on in the NEXAFS calculations for the MO projection. If your system is a gas-phase system (no metal surface) this step and be skipped as the .check file that will be used will be from the ground-state calculation previously ran so for this would be the <em>azulene_gas.check</em> file.</p>
+<p>To acquire the pseudopotential string if needed, open any of the <em>.usp</em> files. Here we will use the <em>C_C18_PBE_OTF.usp</em> file. At the top of the file should give you all the information about the pseudopotential used and near the bottom of the box will be the definition string for you to copy to use for the XPS and NEXAFS calculations. In this case for carbon, the string is <code>2|1.4|10|12|13|20:21(qc=7)</code>, record this down and do the same for each element in the system to use in the next step.</p>
+<p><img alt="Pseudopotential string" src="../../assets/images/spectroscopy/pseudopotential_string.png" /></p>
+<h2 id="2-generation-of-xps-and-nexafs-inputs-using-autoscriptpy">2. Generation of XPS and NEXAFS inputs using autoscript.py</h2>
+<p>To generate the XPS and NEXAFS directories with all the input files needed for each individual carbon atom you need to set up a directory with:
+* <em>autoscript.py</em>
+* <em>core_excitation.py</em>
+* <em>Geometry file of the system</em></p>
+<p><img alt="autoscript" src="../../assets/images/spectroscopy/autoscript.png" /></p>
+<p>The <em>core_excitation.py</em> file can be left alone and doesn't need to be altered. To use this code all you need to do is open up the <em>autoscript.py</em> file and change the required fields and set the settings you want in the calculation, overall, this will be the same as the ground-state calculations with a few exceptions which will be explained. At the top the first thing to alter is the <code>input_name</code>, the geometry file to read in and the <code>output_name</code> you want the script to use as the CASTEP seedname. In this case, these two are basically the same and would be <code>azulene_Ag.cell</code> and <code>azulene_Ag</code> but through ASE, you can read in any file format you want if needed.</p>
+<p>Next is where you need to set the elements and pseudopotential strings you save before. Here you can create any number you need and copy in the pseudopotential strings. For the atoms you want to study the XPS for you will need to copy in the pseudopotential string twice again but this time adding in the electron configuration to include either a full core-hole (XPS) or half core-hole (NEXAFS). This is done starting at line 81, where for a C1s calculation we put in <code>element='C'</code> and <code>pspots='2|1.4|10|12|13|20:21{1s1,2s2,2p3}(qc=7)'</code> with the full core-hole in the <code>xce</code> and the same again for <code>nce</code> but this time with a half core hole.</p>
+<p><img alt="core holes" src="../../assets/images/spectroscopy/core_holes.png" /></p>
+<p>Also, starting on line 100 is where the pseudopotential strings you stated at the top are written out to the .cell files and you need to add/change to match with the elements you have, this will include adding in any new lines for the number of elements and adding this line to the print line for both XPS and NEXAFS sections. In the default script included is an example of how a new line if a 4th element nitrogen is needed and if a gas-phase calculation is begin run then the metal and line3 would need to be commented out.</p>
+<p><img alt="write pseudo" src="../../assets/images/spectroscopy/write_pseudo.png" /></p>
+<p>The final part is to set the parameters you want for the calculation. Under the CASTEP calculators <code>QM1</code> and <code>QM2</code> you should set <code>castep_command</code> to the path of where your CASTEP binary is located. Next in QM1 choose and set all the keywords you want to include in the XPS calculation. Then if any settings need to be changed for the NEXAFS calculation add these to <code>QM2</code>. Most likely this will only need to be <code>nextra_bands</code> and <code>elnes_nextra_bands</code>. This is due to only the first needed for XPS and usually, only a low number is needed and any higher is a waste computationally. For the NEXAFS calculations the second term is needed and to generate a nice full spectrum without it ending too soon a much larger number of bands are needed and for the MolPDOS analysis, both <code>nextra_bands</code> and <code>elnes_nextra_bands</code> need to be the same value in the NEXAFS case. So set this value to a higher value(trial and error/learning will help with picking a suitable number).</p>
+<p>To get a general idea of what are suitable settings you will need to change and use, <code>cut_off_energy=450</code> is suitable enough for most systems, a sanity check to make sure you have a suitable value is to look at the <em>.usp</em> files for all elements and at the top of the file are cut-off values and a level of accuracy they give, make sure all elements are at least FINE, <code>kpoints_mp_grid='6 6 1'</code> is sufficient for metal surface structures and only <code>'1 1 1'</code> is needed for gas-phase. For XPS calculations <code>nextra_bands=100</code> is more than enough. For <code>elnes_nextra_bands</code> this depends on the metal used and for gas-phase as well the size of the unit cell. The larger the unit cell the higher number needed along with higher atomic number metals, a good starting point would probably be <code>1000</code>.</p>
+<p>Finally, if a MolPDOS analysis is needed you need to set a few other keywords for this. The first is the molecular orbitals you want to project out. Here you can give as many MO states as you want but the key ones you want are the frontier states around the HOMO and LUMO. To get the correct numbers of the HOMO and LUMO you can simply sum up all the electrons in the valence shell of all atoms in the molecule and divide by two. For hydrogen this is 1, carbon is 4, nitrogen 5 etc. The halved number will correspond to the HOME state. So in this case for azulene, C10H8 has a total of 48 valence electrons, so state 24 is the HOMO. You would ideally like a range above and below the bandgap with more unoccupied states than occupied. In the script change the range in MO to the required range and secondly is the reference .check file needed. This will be the azulene_free.check so change this to the right name. For a gas-phase calculation, I would suggest something along the lines of azulene_ground.check as keeping the same name as it is already would not work. Last is to comment out the <code>assert 0</code> on line 130 to run the part of the script that will write these settings out.</p>
+<p>Once all of that is done it is time to run <em>autoscript.py</em>, you should see two directories called XPS and NEXAFS have been created. These should contain a directory for each carbon atom in your molecule labeled with a number, this number just corresponds to the order it appears in the input geometry file. If you look into these directories they should contain the two CASTEP input files <em>.cell</em> and <em>.param</em>. You can easily copy the parameter file over to the main folder, set the charge to zero and use it for the ground state calculation.</p>
+<p><img alt="run autoscript" src="../../assets/images/spectroscopy/run_autoscript.png" /></p>
+<p>You will notice that running <em>autoscript.py</em> will give a warning that a pseudopotential path has not been given to the calculator, this is fine and is not a problem as we are specifically stating our pseudopotentials out and not using a database which is what the code is asking for. This function can be used to point to a database of pseudopotentials which is not implemented to keep full control over the pseudopotentials we want to use.</p>
+<h2 id="3-setting-up-and-running-jobs">3. Setting up and running jobs</h2>
+<p>Now you can copy over the contents of your newly created <strong>XPS</strong> and <strong>NEXAFS</strong> folders back to your main folder and finally set a few things left before copying over the files to your chosen cluster to run them.</p>
+<p>The first would be to create your reference <em>azulene_free.check</em> file needed for the MolPDOS calculation. Once this is done this file then needs to be copied into every atom directory in the NEXAFS directory. If a gas-phase calculation is being performed this will instead be the <em>azulene_gas.check</em> created from the ground state calculation and changed to be called <em>azulene_ground.check</em>. Also, what is needed is a .deltascf file which gives the parameters needed for the MolPDOS calculation, here we point the code to the <em>azulene_free.check</em> file and list the specific states that we want to project out.</p>
+<p><img alt="deltascf" src="../../assets/images/spectroscopy/deltascf_file.png" /></p>
+<p>Once done each atom folder should look like this.</p>
+<p><img alt="nexafs setup" src="../../assets/images/spectroscopy/nexafs_setup.png" /></p>
+<p>All that's is left is to run all of the XPS and NEXAFS jobs. In regards to the number of nodes and walltime needed for the calculations, the XPS calculations will be similar to the length of the ground-state calculation. The NEXAFS will require more memory (nodes) and longer walltimes and the best practice would be to run only one calculation first to gauge this and then use the settings for all of the rest. With time a better understanding of the requirements needed will be able to be learned. Once done transfer the data back to your local machine and for NEXAFS calculations you should see the usual outputs along with a <em>.molpdos_state_x_1</em> file for all MO state you gave earlier.</p>
+<p><img alt="molpdos state" src="../../assets/images/spectroscopy/molpdos_state.png" /></p>
+<h2 id="4-obtaining-and-plotting-xps">4. Obtaining and plotting XPS</h2>
+<p>The first task that needs to be done after all the calculations are done is to calculate the XPS binding energies for each atom and plot the spectrum, to do this we will use the two scripts:
+* <em>castep_get_xps_energies.py</em> 
+* <em>plot_xps.py</em></p>
+<p>The <em>castep_get_xps_energies.py</em> python script should be placed in the <strong>XPS</strong> directory and then the necessary parameters have to be changed in the script manually. These will be the <code>filename</code>, <code>element</code> and <code>atoms</code> to the required settings that match the system. Once this is done, the script can be executed and it will read the groud-state and excited-state energies for each atom and calculate and apply the pseudopotential correction, and finally print out the binding energies into an XPS_peaks.txt file.</p>
+<p><img alt="xps energies" src="../../assets/images/spectroscopy/castep_get_xps_energies.png" /></p>
+<p><img alt="getting xps energies" src="../../assets/images/spectroscopy/getting_xps_energies.png" /></p>
+<p>With the XPS binding energies now written out, the <em>plot_xps.py</em> script can be used to take the individual shifts and sum them all up and plot them into a broadened spectrum. By commenting out the <code>assert 0</code> command on line 87 the script will broaden each individual atom peak and create text files for each atom which can be plotted along with the full spectrum to show the breakdown of the spectrum.</p>
+<h2 id="5-nexafs-post-processing-and-molpdos">5. NEXAFS Post-Processing and MolPDOS</h2>
+<p>Now to run the NEXAFS post-processing we need a settings file with all the information needed, this will be a <em>.molpdos file</em>. In this file, you will see a variety of settings needed to calculate the NEXAFS and MO data. The most significant ones that need to be changed are:
+* <code>nexafs_theta</code> - The theoretical X-ray incidence angle you want to calculate for
+* <code>nexafs_xshift</code> - The XPS binding energy corresponding to the same carbon, will be done automatically by the script
+* <code>nexafs_state</code> - Which atomic species you want to calculate for, you will need to only change the first number. This number will be +1 the number of elements in the system, as for this example, is <code>4 1 1 1</code>. 4 because the first element is hydrogen, second is carbon, third is silver and the last is the new excited carbon, <code>C:exc</code>, we defined (this element will always be the last one in the list).</p>
+<p>If you want to project the NEXAFS transitions onto molecular states of a reference system, you also have to set:
+* <code>modos_state</code> - Set the corresponding states to exactly the same orbital values you selected previously for the calculation</p>
+<p><img alt="moldpdos file" src="../../assets/images/spectroscopy/molpdos_file.png" /></p>
+<p>To run the MolPDOS post-processing you first need to have the MolPDOS binary located in your path and this will use the <em>execute_molpdos.sh</em> script to first add the correct nexafs_xshift to the right atoms and then run the MolPDOS binary for each angle you want. So these need to be set at the top of the script, change the first <code>Array</code> to the correct values of the atoms and the AngleArray to the incidence angles you want to calculate. The change the molecule, metal and element to the correct setting and then run the script.</p>
+<p>This script will take some time to run and finish for all of the atoms and angles but will write out the progress of the script into the terminal to show you the progress. To not take up the terminal nohup can be used to run the script in the background. Once done this will have to generate a new folder in each of the atoms folders for each angle chosen and be filled with a whole host of <em>.dat</em> files.</p>
+<p><img alt="run molpdos" src="../../assets/images/spectroscopy/run_molpdos.png" /></p>
+<p><img alt="finish molpdos" src="../../assets/images/spectroscopy/finish_molpdos.png" /></p>
+<p>These should be organised into a corresponding directory labeled based on the theta value, for example, <strong>t25</strong>. Repeat this MolPDOS process for each incidence angles you want to simulate for and for all carbon atoms. Normal practice would be for 00, 25, 53, and 90 degrees. Your directory for all carbons should look like this.</p>
+<p><img alt="molpdos files" src="../../assets/images/spectroscopy/molpdos_files.png" /></p>
+<p>You should use an automated script for this procedure. Provided is the <em>auto_molpdos.sh</em> script which should be executed in the NEXAFS directory, It reads the <em>C_XPS_peaks.txt</em> file (copy from XPS to the NEXAFS directory), changes a generic <em>.molpdos</em> file to match the desired angle and XPS binding energies, goes to the corresponding carbon directory, and executes the script, and moves the resulting data in the respective folders.</p>
+<h2 id="6-summation-and-broadening-of-the-nexafs-spectra">6. Summation and broadening of the NEXAFS spectra</h2>
+<p>The final step left to do is to take all of the data produced through the MolPDOS post-processing, sum the contributions from all carbon atoms and applying a broadening function to create the NEXAFS spectra. For this you will need the python scripts:
+* <em>plot_nexafs.py</em>
+* <em>plot_mo.py</em></p>
+<p>These scripts should be placed in the <strong>NEXAFS</strong> directory and change the corresponding settings inside the script to match you data. These are listed into different groups, the first is <code>Broadening Parameters</code>. These are the settings of the pseudo-Voight broadening scheme that will be applied, the settings in there are the default carbon settings that usually work best but they can be modified to create the best spectra. If a different element is being studied N or O K-edge then the <code>xstart</code> and <code>xstop</code> values will have to be changed to fall in the energy range of the chose element. The next group are the <code>System Settings</code>, these are the main settings to change. Here we have the <code>molecule</code> and <code>metal</code> variables to change to the name of your system, and then also the <code>element</code>. We have the <code>n_type</code> which will decide what NEXAFS spectra you want to generate, a number between 1-4, default would be 4, the script shows what each number performs. <code>angle</code> you will set to the same angles you selected when running MolPDOS, so in this case <code>'t00', 't25', 't53', t90'</code>. Then the <code>numbers</code> will be the number range of your atom directories, here 48 to 57, and the atom number, this is as described before the value the excited element comes in the list of all elements, always the last number.</p>
+<p><img alt="plot nexafs settings" src="../../assets/images/spectroscopy/plot_nexafs_settings.png" /></p>
+<p>Run this script and it will generate (for each angle) a <em><em>deltas.txt_, containing the summed up raw data of all NEXAFS transitions, and a _</em>spectrum.txt' file with the fully calculated broadened spectrum. If the individual carbon contributions of the NEXAFS spectrum is desired then comment out the <code>assert 0</code> command on line 122 and this will generate a separate </em>.txt_ file for each individual atom at each angle.</p>
+<p><img alt="plot nexafs" src="../../assets/images/spectroscopy/plot_nexafs.png" /></p>
+<p>The last step would be to output the individual MO contributions, these settings to change are the exact same as before for the NEXAFS script but now with one more which is <code>MO</code>, which will be the list of MO orbitals you choose to project out. Run the script again and you will receive a <em>*.txt</em> file of the delta peaks and the broadened orbital projection for all orbitals and angles. This can now be plotted with its corresponding NEXAFS spectra to view its contributions.</p>
+<p><img alt="plot mo" src="../../assets/images/spectroscopy/plot_mo.png" /></p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../../compilation/gpaw-sulis/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GPAW on Sulis" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              GPAW on Sulis
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../julia/julia/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction to Julia" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Introduction to Julia
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2022 Reinhard Maurer
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+      
+      
+    
+    <a href="https://github.com/maurergroup" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+    </a>
+  
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/compsurfchem" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tooltips", "navigation.indexes", "navigation.top", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow"], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
