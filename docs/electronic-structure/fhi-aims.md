@@ -79,6 +79,43 @@ set(CMAKE_C_COMPILER mpicc CACHE STRING "")
 set(CMAKE_C_FLAGS "-O3 -funroll-loops -std=gnu99" CACHE STRING "")
 ```
 
+##### Locally with Intel oneAPI
+```makefile 
+###############
+# Basic Flags
+###############
+set(CMAKE_Fortran_COMPILER mpiifort CACHE STRING "" FORCE)
+set(CMAKE_Fortran_FLAGS "-O3 -fp-model precise" CACHE STRING "" FORCE)
+set(Fortran_MIN_FLAGS "-O0 -fp-model precise" CACHE STRING "" FORCE)
+set(LIB_PATHS "/opt/intel/mkl/lib/intel64" CACHE STRING "" FORCE)
+set(LIBS "mkl_intel_lp64 mkl_sequential mkl_core mkl_blacs_intelmpi_lp64 mkl_scalapack_lp64" CACHE STRING "" FORCE)
+
+###########
+# C Flags
+###########
+set(CMAKE_C_COMPILER icc CACHE STRING "" FORCE)
+set(CMAKE_C_FLAGS "-O3 -ip -fp-model precise -std=gnu99" CACHE STRING "" FORCE)
+```
+
+##### M1 Mac
+This uses the GNU compiler as Intel is not compatible on Apple silicon. It is also required to download the following packages with homebrew first:
+- gcc 
+- open-mpi
+- openblas
+- lapack
+- cmake
+- scalapack
+```makefile
+set(CMAKE_Fortran_COMPILER "mpifort" CACHE STRING "")
+set(CMAKE_Fortran_FLAGS "-O3 -ffree-line-length-none -fallow-argument-mismatch" CACHE STRING "")
+set(CMAKE_C_COMPILER "gcc-12" CACHE STRING "")
+set(CMAKE_C_FLAGS "-O3" CACHE STRING "")
+
+set(LIBS "blas scalapack" CACHE STRING "")
+set(USE_MPI        ON CACHE BOOL "")
+set(USE_SCALAPACK  ON CACHE BOOL "")
+```
+
 Run `cmake -C initial.cmake ../.` to configure your build.
 
 ### 4: Compile the code
