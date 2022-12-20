@@ -1,6 +1,6 @@
 # Contributing to NQCD
 
-![NQCD logo](/assets/images/julia/nqcdlogo.png){ align=right width=200 }
+![NQCD logo](../assets/images/julia/nqcdlogo.png){ align=right width=200 }
 
 This page describes the process of contributing to NQCD for members of the maurergroup.
 In particular, it focuses on the case where your contributions should be kept private until ready for publication.
